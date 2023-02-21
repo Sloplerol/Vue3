@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let person = {
+            name: 'zjj',
+            age: 22
+        }
+        let p = {};
+        
+        try {
+            Object.defineProperty(p,'name',{
+                get(){
+                    return person.name
+                }
+            })
+            Object.defineProperty(p,'name',{
+                get(){
+                    return person.name
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+        // 当重复对一个属性设置getter和setter的话会报错后面的代码不会执行
+
+        // Reflect返回值为布尔值 来通知你是否此次设置响应式成功
+        const a = Reflect.defineProperty(p,'name',{
+            get(){
+                return person.name
+            }
+        })
+        const b = Reflect.defineProperty(p,'name',{
+            get(){
+                return person.name
+            }
+        })
+        console.log(a,b);
+        console.log('hello world');
+    </script>
+</body>
+</html>

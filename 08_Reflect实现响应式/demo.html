@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let person = {
+            name: 'zjj',
+            age: 20
+        }
+        // 将原数据实例化成一个代理对象
+        let p = new Proxy(person,{
+            //当读取的时候调用
+            get(target,propname){
+                console.log(`我读取了p下的${propname}`);
+                // return target[propname];
+                return Reflect.get(target,propname)
+            },
+            // 当修改或者是增添数据时候调用
+            set(target,propname,value){
+                console.log(`我修改p下的${propname}`);
+                // target[propname] = value;
+                Reflect.set(target,propname,value)
+            },
+            // 当删除的时候调用
+            deleteProperty(target,propname){
+                console.log(`我删除p下的${propname}`);
+                // return delete target[propname];
+                return Reflect.deleteProperty(target,propname);
+            }
+        });
+    </script>
+</body>
+</html>
